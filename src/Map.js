@@ -3,11 +3,11 @@ import { GoogleMap, InfoWindow, Marker } from 'react-google-maps';
 
 const Map = ({ currentLocation, hospitals, selectedHospital, handleMarkerClick, handleInfoWindowClose }) => {
   return (
-    <GoogleMap
+    <>
       defaultZoom={14}
       defaultCenter={currentLocation}
       center={currentLocation}
-    >
+    
       {hospitals.map((hospital) => (
         <Marker
           key={hospital.place_id}
@@ -32,7 +32,7 @@ const Map = ({ currentLocation, hospitals, selectedHospital, handleMarkerClick, 
           </div>
         </InfoWindow>
       )}
-    </GoogleMap>
+    </>
   );
 };
 
