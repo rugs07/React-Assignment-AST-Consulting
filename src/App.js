@@ -4,6 +4,7 @@ import SignIn from "./SignIn";
 import Home from "./Home";
 import Default from "./Default";
 
+
 const App = () => {
   return (
     <div className="App">
@@ -12,6 +13,7 @@ const App = () => {
           <Route exact path="/SignIn" element={<SignIn />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/" element={<Default />} />
+          {/* <Route path="/Map" element={<WrappedMap />} /> */}
          </Routes>
       </BrowserRouter>
     </div>

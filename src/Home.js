@@ -1,11 +1,14 @@
 import React,{useState,useEffect} from "react";
-import Map from "./Map";
 import axios from "axios";
+import "./App.css"
+import Map from "./Map";
 
 function Home() {
+
   const [currentLocation, setCurrentLocation] = useState(null);
   const [hospitals, setHospitals] = useState([]);
   const [selectedHospital, setSelectedHospital] = useState(null);
+  const [showMap,setShowMap] = useState(false);
 
   const handlelocation =  () => {
     navigator.geolocation.getCurrentPosition(
@@ -31,35 +34,36 @@ function Home() {
 
   useEffect(() => {
     if (currentLocation) {
-        console.log("i Am here")
+        console.log("I Am here")
       axios
         .get(
-        `https://api.geoapify.com/v2/places?categories=healthcare.hospital&filter=circle:${currentLocation.lng},${currentLocation.lat},5000&limit=20&apiKey=024620af7b884a94b4d0a1a2225c7985`
+        `https://api.geoapify.com/v2/places?categories=healthcare.hospital&filter=circle:${currentLocation.lng},${currentLocation.lat},500&limit=20&apiKey=024620af7b884a94b4d0a1a2225c7985`
         )
         .then((response) => {
         setHospitals(response.data.features);
           console.log(response.data);
           console.log(response.data.features[0])
-        //   console.log(hospitals);
+          setShowMap(true);
         })
         .catch((error) => {
-          console.log("Error Coming Bhidu Chekc the code once again", error);
+          console.log("Error, Check the code once again", error);
         });
     }
   }, [currentLocation]);
 
   return (
-    <div>
-      <button onClick={handlelocation}>
-        Fetch User Location and Search Nearby Hospitals
-      </button>
-      {/* <Map
+    <div className="Home">
+      {!showMap && (
+        <button onClick={handlelocation}>Fetch User Location and Show nearby Hospitals</button>
+      )}
+      {showMap && (
+        <Map 
         currentLocation={currentLocation}
         hospitals={hospitals}
-        selectedHospital={selectedHospital}
         handleMarkerClick={handleMarkerClick}
         handleInfoWindowClose={handleInfoWindowClose}
-      /> */}
+        />
+      )}
     </div>
   );
 }
