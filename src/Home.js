@@ -37,7 +37,7 @@ function Home() {
         console.log("I Am here")
       axios
         .get(
-        `https://api.geoapify.com/v2/places?categories=healthcare.hospital&filter=circle:${currentLocation.lng},${currentLocation.lat},500&limit=20&apiKey=024620af7b884a94b4d0a1a2225c7985`
+        `https://api.geoapify.com/v2/places?categories=healthcare.hospital&filter=circle:${currentLocation.lng},${currentLocation.lat},5000&limit=20&apiKey=024620af7b884a94b4d0a1a2225c7985`
         )
         .then((response) => {
         setHospitals(response.data.features);
