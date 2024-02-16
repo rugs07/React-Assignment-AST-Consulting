@@ -40,9 +40,7 @@ function Map({
           offset: [0, -6],
           color: "red",
           draggable: false
-       })
-        .setLngLat([hospital.properties.lon, hospital.properties.lat]).
-        addTo(map)
+       }).setLngLat([hospital.properties.lon, hospital.properties.lat]).addTo(map)
         console.log(hospital);
         console.log(marker);
 
