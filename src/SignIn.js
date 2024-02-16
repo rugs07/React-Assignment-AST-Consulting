@@ -5,8 +5,6 @@ import Home from './Home';
 import "./App.css"
 import { useNavigate } from 'react-router-dom';
 
-
-
 function SignIn() {
     let navigate = useNavigate();
     const [value,setValue] = useState('');
