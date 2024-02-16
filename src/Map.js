@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import maplibre from "maplibre-gl";
+import "./App.css"
 
 function Map({
   currentLocation,
@@ -29,29 +30,37 @@ function Map({
         center: [initialState.lng, initialState.lat],
         zoom: initialState.zoom,
       });
+      map.addControl(new maplibre.NavigationControl());
+
       console.log(hospitals);
       hospitals.forEach((hospital) => {
         const marker = new maplibre.Marker({
-          color: "red", // Change color to red
-          draggable: false, // 
-        })
-          .setLngLat([hospital.geometry.coordinates[0], hospital.geometry.coordinates[1]]);
-
-        marker.addTo(map); // Add the marker to the map
+          key: hospital.place_id,
+          anchor: 'bottom',
+          offset: [0, -6],
+          color: "red",
+          draggable: false
+       })
+        .setLngLat([hospital.properties.lon, hospital.properties.lat]).
+        addTo(map)
+        console.log(hospital);
+        console.log(marker);
 
         marker.getElement().style.fontSize = "44px";
+        marker.getElement().style.transform = "scale(1)";
+        
+        });
 
-      });
-
-      // return () => {
-      //   map.remove();
-      // };
+      return () => {
+        map.remove();
+        console.log("Cache Cleared")
+      };
     }
   }, [currentLocation, hospitals]);
 
   return (
     <>
-    <h1>Nearby Hospitals are located by Red Markers</h1>
+    <h1 style={{ fontSize: '24px', color: '#333', marginBottom: '20px', textAlign: 'center', fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }} >Nearby Hospitals are located by Red Markers</h1>
     <div    
       className="map-container"
       ref={mapContainerRef}

@@ -7,7 +7,7 @@ export default function Default() {
     React.useEffect(() => {
         navigate('/SignIn')
     }
-        , []);
+        , [navigate]);
     return (
         <div>
             {/* {navigate('/login')} */}
